@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -12,8 +13,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->get();
-        return view('auth.user', compact('users'));
+        $user = User::all();
+        return view('auth.user', [
+            'user' => $user
+        ]);
+
     }
 
     /**
@@ -45,15 +49,32 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::pluck('name')->all();
+        $userRole = $user->roles->pluck('name')->all();
+
+        return view('auth.edituser', compact('user','roles','userRole'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'roles' => 'required'
+        ]);
+
+        $user = User::find($id);
+        $input = $request->all();
+        $user->update($input);
+        
+        $user->syncRoles($request->input('roles'));
+
+        return redirect()->route('users.index')
+                        ->with('success','User updated successfully');
     }
 
     /**
