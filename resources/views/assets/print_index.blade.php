@@ -60,13 +60,32 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#printAssetsTable').DataTable({
-            "paging": false,
-            "info": true
+        var table = $('#printAssetsTable').DataTable({
+            "paging": true,
+            "pageLength": 10,
+            "info": true,
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Semua"]],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/English.json"
+            }
         });
 
+        // Handle "Pilih Semua" untuk seluruh halaman (bukan hanya yang terlihat)
         $('#selectAll').on('click', function() {
-            $('.asset-checkbox').prop('checked', this.checked);
+            var rows = table.rows({ 'search': 'applied' }).nodes();
+            $('input.asset-checkbox', rows).prop('checked', this.checked);
+        });
+
+        // Pastikan checkbox di halaman lain tetap terkirim saat form disubmit
+        $('form').on('submit', function(e) {
+            var form = this;
+            table.$('input.asset-checkbox:checked').each(function() {
+                if (!$.contains(document, this)) {
+                    $(form).append(
+                        $('<input>').attr('type', 'hidden').attr('name', 'asset_ids[]').val($(this).val())
+                    );
+                }
+            });
         });
     });
 </script>
