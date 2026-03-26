@@ -24,33 +24,48 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ## Assets Management System GUM (ANYS)
 
 Projek yang di bangun menggunakan laravel 12 , PHP 8.2, dan database PostgreSQL 15
+Projek ini merupakan aplikasi manajemen data aset sederhana dengan fitur:
+- Login
+- Dashboard
+- User Account
+- Data Asset
+- Histori Pindah Tangan Asset
+- Print Label
 
-## Laravel Sponsors
+## Instalation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Clone repository ini ke projek anda
+2. Composer Install
+3. edit file .env untuk setup database
+4. php artisan migrate
+5. php artisan key:generate
+6. php artisan serve
 
-### Premium Partners
+## Documentation Apps
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Login Page 
 
-## Contributing
+![alt text](image.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Dashboard Page
 
-## Code of Conduct
+![alt text](image-1.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+User Account Page
 
-## Security Vulnerabilities
+![alt text](image-2.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Data Asset Page
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+Print Label Page
+
+![alt text](image-6.png)
 
 ## License
 
