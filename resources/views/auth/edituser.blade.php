@@ -59,6 +59,15 @@
                                 <option value="user">User</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Ubah Departemen</label>
+                            <select id="department" name="department" class="form-control" required>
+                                <option value="">--Pilih Departemen--</option>
+                                <option value="IT">IT</option>
+                                <option value="Umum">Umum</option>
+                                <option value="EHSS">EHSS</option>
+                            </select>
+                        </div>
                         <!-- Save changes button-->
                         <button class="btn btn-primary btn-send" type="submit">Simpan</button>
                         <a href="{{ route('users.index') }}"><input type="Button" class="btn btn-secondary btn-send" value="Kembali"></a>

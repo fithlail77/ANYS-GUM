@@ -29,7 +29,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i> <img src="{{ asset('sb-admin-2/img/gum.png') }}" alt="" style="max-width: 50px; height: auto;"> </i>
                 </div>
                 <div class="sidebar-brand-text mx-3">ANYS GUM</div>
             </a>
@@ -62,7 +62,7 @@
             </li>
             @endrole
 
-            @role('admin')
+            @if(auth()->check() && auth()->user()->hasAnyRole(['admin', 'user']))
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Menu Management</div>
             @php
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </li>
-            @endrole
+            @endif
             <hr class="sidebar-divider d-none d-md-block">
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -90,8 +90,9 @@
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-
+        
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <h4>Asset Management System</h4>
                     <ul class="navbar-nav ml-auto">
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">

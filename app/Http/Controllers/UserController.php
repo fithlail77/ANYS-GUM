@@ -37,6 +37,7 @@ class UserController extends Controller
         $user = new User;
         $user->name = $request->get('username');
         $user->email = $request->get('email');
+        $user->department = $request->get('department');
         $user->password = bcrypt('password');
         $user->assignRole($request->get('roles') == 'admin' ? 'admin' : 'user');
         $user->save();
@@ -73,7 +74,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+        $user->department = $request->get('department');
+        $user->save();
 
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->assignRole($request->get('roles') == 'admin' ? 'admin' : 'user');
+
+        return redirect()->route('users.index')->with('success', 'User Berhasil Diubah!!');
     }
 
     /**

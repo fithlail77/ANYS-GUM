@@ -96,6 +96,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-lg-20 control-label">Departemen</label>
+                        <div class="col-lg-10">
+                            <select id="department" name="department" class="form-control" required>
+                                <option value="">--Pilih Departemen--</option>
+                                <option value="IT">IT</option>
+                                <option value="Umum">Umum</option>
+                                <option value="EHSS">EHSS</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>

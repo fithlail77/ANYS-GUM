@@ -44,7 +44,14 @@ class AssetController extends Controller
             'depreciation',
             'condition',
             'photo_path'
-        ])->orderBy('asset_number', 'asc');
+        ]);
+
+        // Filter: Hanya menampilkan asset yang pemiliknya (asset_owner) sesuai departemen user
+        if (auth()->user()->department) {
+            $query->where('asset_owner', auth()->user()->department);
+        }
+
+        $query->orderBy('asset_number', 'asc');
 
         return DataTables::of($query)
             ->addIndexColumn()
@@ -166,7 +173,14 @@ class AssetController extends Controller
     public function printIndex()
     {
         // Mengambil semua data aset untuk ditampilkan di tabel pemilihan
-        $assets = \App\Models\Asset::all();
+        $query = \App\Models\Asset::query();
+
+        // Filter: Hanya menampilkan asset yang sesuai departemen user untuk halaman print
+        if (auth()->user()->department) {
+            $query->where('asset_owner', auth()->user()->department);
+        }
+
+        $assets = $query->get();
         return view('assets.print_index', compact('assets'));
     }
 

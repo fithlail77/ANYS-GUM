@@ -12,4 +12,13 @@ class Asset extends Model
     {
         return $this->hasMany(AssetHistory::class);
     }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('department', function ($builder) {
+            if (auth()->check() && auth()->user()->department) {
+                $builder->where('asset_owner', auth()->user()->department);
+            }
+        });
+    }
 }

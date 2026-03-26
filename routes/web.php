@@ -18,7 +18,7 @@ Route::middleware(['auth'])->group(function () {
     // Route untuk menampilkan halaman user
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');    
-    Route::put('users/update', [UserController::class, 'update'])->name('users.update');
+    Route::put('users/{user}/update', [UserController::class, 'update'])->name('users.update');
 
     // Placeholder route untuk edit dan password (sesuaikan nanti)
     Route::get('users/{user}/show', [UserController::class, 'show'])->name('users.show');

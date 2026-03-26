@@ -33,20 +33,25 @@
             font-size: 10px;
             font-weight: bold;
             margin-bottom: 1mm;
+            text-align: center;
+            width: 100%;
         }
         .code-display {
             margin: 1mm 0;
             display: flex;
             justify-content: center;
+            align-items: center;
             width: 100%;
         }
         svg.barcode {
+            display: block;
             max-width: 42mm; /* Dibatasi agar tidak menyentuh tepi kertas 50mm */
             height: 15mm;   /* Tinggi proporsional untuk kertas 30mm */
         }
         .asset-name {
             font-size: 8px;
             margin-top: 1mm;
+            text-align: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

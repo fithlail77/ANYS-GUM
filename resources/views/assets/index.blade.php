@@ -87,7 +87,12 @@
                     </div>
                     <div class="col-md-3">
                         <label class="small mb-1">Pemilik Asset</label>
-                        <input class="form-control" name="asset_owner" type="text"/>
+                        <select class="form-control" name="asset_owner" required>
+                            <option value="">-- Pilih --</option>
+                            <option value="IT">IT</option>
+                            <option value="Umum">Umum</option>
+                            <option value="EHSS">EHSS</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row gx-3 mb-3">
