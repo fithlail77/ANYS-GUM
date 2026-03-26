@@ -162,4 +162,24 @@ class AssetController extends Controller
     {
         //
     }
+
+    public function printIndex()
+    {
+        // Mengambil semua data aset untuk ditampilkan di tabel pemilihan
+        $assets = \App\Models\Asset::all();
+        return view('assets.print_index', compact('assets'));
+    }
+
+    public function printProcess(Request $request)
+    {
+        $ids = $request->input('asset_ids', []);
+        $type = $request->input('print_type', 'barcode');
+
+        if (empty($ids)) {
+            return back()->with('error', 'Silakan pilih minimal satu aset.');
+        }
+
+        $assets = \App\Models\Asset::whereIn('id', $ids)->get();
+        return view('assets.print_labels', compact('assets', 'type'));
+    }
 }

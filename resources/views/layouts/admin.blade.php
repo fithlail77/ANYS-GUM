@@ -66,7 +66,7 @@
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Menu Management</div>
             @php
-                $isMenuActive = request()->routeIs('assets.index');
+                $isMenuActive = request()->routeIs('assets.index') || request()->routeIs('assets.print-index');
             @endphp
             <li class="nav-item {{ $isMenuActive ? 'active' : '' }}">
                 <a class="nav-link {{ $isMenuActive ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseThree"
@@ -78,6 +78,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Asset:</h6>
                         <a class="collapse-item {{ request()->routeIs('assets.index') ? 'active' : '' }}" href="{{ route('assets.index') }}">{{ __('Data Asset') }}</a>
+                        <a class="collapse-item {{ request()->routeIs('assets.print-index') ? 'active' : '' }}" href="{{ route('assets.print-index') }}">{{ __('Print Barcode/QR') }}</a>
                     </div>
                 </div>
             </li>
