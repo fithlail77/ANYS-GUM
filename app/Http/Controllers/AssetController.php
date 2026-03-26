@@ -109,7 +109,8 @@ class AssetController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $asset = Asset::findOrFail($id);
+        return view('assets._edit', compact('asset'));
     }
 
     /**
@@ -117,7 +118,41 @@ class AssetController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $asset = Asset::findOrFail($id);
+        $validateData = $request->validate([
+            'asset_sap_code' => 'required|integer',
+            'asset_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category' => 'required|string|max:255',
+            'asset_owner' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'acquisition_date' => 'required|date',
+            'acquisition_cost' => 'nullable|numeric',
+            'depreciation' => 'nullable|numeric',
+            'condition' => 'required|string|max:255',
+            'photo' => 'nullable|image|max:2048',
+        ]);
+
+        $this->assetService->updateAsset($asset, $validateData);
+
+        return redirect()->back()->with('success', 'Data aset berhasil diperbarui.');
+    }
+
+    /**
+     * Proses Pindah Tangan Aset
+     */
+    public function transfer(Request $request, string $id)
+    {
+        $asset = Asset::findOrFail($id);
+        $validateData = $request->validate([
+            'new_owner' => 'required|string|max:255',
+            'transfer_date' => 'required|date',
+            'notes' => 'nullable|string'
+        ]);
+
+        $this->assetService->transferAsset($asset, $validateData);
+
+        return redirect()->back()->with('success', 'Aset berhasil dipindahtangankan.');
     }
 
     /**

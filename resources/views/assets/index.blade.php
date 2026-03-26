@@ -155,6 +155,23 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Edit Data Asset -->
+<div class="modal fade" id="modal-EditAssets" tabindex="-1" role="dialog" aria-labelledby="modal-EditAssetsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-EditAssetsLabel">Update Data & Riwayat Asset</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+            <!-- Konten diisi via AJAX -->
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -214,6 +231,29 @@
             },
             error: function(xhr) {
                 modalBody.html('<div class="alert alert-danger">Gagal memuat data. Silakan coba lagi.</div>');
+            }
+        });
+    });
+
+    // Handle klik tombol edit
+    $('#DataAssetTable').on('click', '.edit-btn', function(e) {
+        e.preventDefault();
+
+        var assetId = $(this).data('id');
+        var url = "{{ route('assets.edit', ':id') }}".replace(':id', assetId);
+        var modal = $('#modal-EditAssets');
+        var modalBody = modal.find('.modal-body');
+
+        modalBody.html('<div class="text-center p-5"><i class="fa fa-spinner fa-spin fa-3x"></i><p class="mt-2">Memuat Form...</p></div>');
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                modalBody.html(response);
+            },
+            error: function(xhr) {
+                modalBody.html('<div class="alert alert-danger">Gagal memuat form edit.</div>');
             }
         });
     });

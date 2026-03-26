@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Routing Resource standar untuk CRUD
     Route::get('assets/data', [AssetController::class, 'data'])->name('assets.data');
+    Route::post('assets/{asset}/transfer', [AssetController::class, 'transfer'])->name('assets.transfer');
     Route::resource('assets', AssetController::class);
 });
 

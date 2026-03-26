@@ -78,6 +78,9 @@
 
             <strong class="d-block mt-4">QR Code</strong>
             <div id="qrcode" class="mt-2 d-flex justify-content-center"></div>
+            <div class="text-center mt-1">
+                <small class="font-weight-bold text-dark">{{ $asset->asset_number }}</small>
+            </div>
         </div>
     </div>
 </div>
@@ -94,10 +97,12 @@
     });
 
     // Generate QR Code
-    new QRCode(document.getElementById("qrcode"), {
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: "{{ $asset->asset_number }}",
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
     });
 </script>
