@@ -16,6 +16,10 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+    <!-- Toastr -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+
 </head>
 
 <body id="page-top">
@@ -27,7 +31,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">ANYS GUM</div>
             </a>
 
             <hr class="sidebar-divider my-0">
@@ -58,6 +62,26 @@
             </li>
             @endrole
 
+            @role('admin')
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">Menu Management</div>
+            @php
+                $isMenuActive = request()->routeIs('assets.index');
+            @endphp
+            <li class="nav-item {{ $isMenuActive ? 'active' : '' }}">
+                <a class="nav-link {{ $isMenuActive ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="{{ $isMenuActive ? 'true' : 'false' }}" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Transaksi</span>
+                </a>
+                <div id="collapseThree" class="collapse {{ $isMenuActive ? 'show' : '' }}" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Asset:</h6>
+                        <a class="collapse-item {{ request()->routeIs('assets.index') ? 'active' : '' }}" href="{{ route('assets.index') }}">{{ __('Data Asset') }}</a>
+                    </div>
+                </div>
+            </li>
+            @endrole
             <hr class="sidebar-divider d-none d-md-block">
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -95,7 +119,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; {{ config('app.name') }} 2026</span>
+                        <span>Copyright &copy; {{ config('app.name') }} 2026 - Created by IT GUM</span>
                     </div>
                 </div>
             </footer>
@@ -114,5 +138,31 @@
 
     <script src="{{ asset('sb-admin-2/js/demo/datatables-demo.js') }}"></script>
 
+    <!-- Toastr scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- JsBarcode for barcode generation -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+    <!-- QRCode.js for QR Code generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    @stack('scripts')
+
+    <script>
+        @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+    </script>
 </body>
 </html>

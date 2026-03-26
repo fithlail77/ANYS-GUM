@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,11 +17,18 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     // Route untuk menampilkan halaman user
     Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::get('users/update', [UserController::class, 'index'])->name('users.update');
+    Route::post('users/store', [UserController::class, 'store'])->name('users.store');    
+    Route::put('users/update', [UserController::class, 'update'])->name('users.update');
 
     // Placeholder route untuk edit dan password (sesuaikan nanti)
+    Route::get('users/{user}/show', [UserController::class, 'show'])->name('users.show');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::get('users/{user}/password', [UserController::class, 'password'])->name('users.password');
+    Route::post('users/{user}/password', [UserController::class, 'changePassword'])->name('users.changePassword');
+    Route::get('users/hapus/{id}', [UserController::class, 'destroy']);
+
+    // Routing Resource standar untuk CRUD
+    Route::get('assets/data', [AssetController::class, 'data'])->name('assets.data');
+    Route::resource('assets', AssetController::class);
 });
 
 require __DIR__.'/auth.php';

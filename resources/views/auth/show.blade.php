@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Ubah Data Pengguna')
+@section('title', 'Ubah Kata Sandi Pengguna')
 
 @section('content')
 
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="#">Profile</a>
+        <a class="nav-link active ms-0" href="#">Profil</a>
     </nav>
     <hr class="mt-0 mb-4" />
     <div class="row">
@@ -24,22 +24,23 @@
         <div class="col-xl-8">
             <!-- Account details card-->
             <div class="card mb-4">
-            <div class="card-header">Detil Akun</div>
+            <div class="card-header">Ubah Kata Sandi Pengguna</div>
                 <div class="card-body">
-                    <form action="{{route('users.update', [$user->id])}}" method="POST">
+                    <form action="{{route('users.changePassword', [$user->id])}}" method="POST">
                         @csrf
-                        <input type="hidden" name="_method" value="PUT">
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Nama Pengguna</label>
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Nama Pengguna" value="{{$user->name}}" readonly />
+                        </div>
+                        <!-- Form Row-->
                         <div class="row gx-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputUsername">Nama Pengguna</label>
-                                <input class="form-control" id="inputUsername" type="text" placeholder="Nama Pengguna" value="{{$user->name}}" readonly />
-                            </div>
+                            <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">Email </label>
                                 <input class="form-control" id="inputFirstName" type="text" placeholder="Nama Profil" value="{{$user->email}}" readonly />
                             </div>
-                        </div>
-                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (last name)-->
                             <div class="col-md-6">
                                 @foreach ($user->roles as $role)
                                 <label class="small mb-1" for="inputLastName">Akses</label>
@@ -47,17 +48,10 @@
                                 @endforeach
                             </div>
                         </div>
+                        <!-- Form Group (email address)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Ubah Akses</label>
-                            <select id="roles" name="role" class="form-control" required>
-                                <option value="">--Pilih Akses--</option>
-                                <option value="admin">Admin</option>
-                                <option value="manager">Manager</option>
-                                <option value="ke">Kerani Estate</option>
-                                <option value="dc">Data Center</option>
-                                <option value="kcpo">Admin Mill</option>
-                                <option value="user">User</option>
-                            </select>
+                            <label class="small mb-1" for="inputKataSandi">Ubah Kata Sandi</label>
+                            <input class="form-control" id="inputKataSandi" type="password"  name="pass" />
                         </div>
                         <!-- Save changes button-->
                         <button class="btn btn-primary btn-send" type="submit">Simpan</button>
@@ -68,4 +62,5 @@
         </div>
     </div>
 </div>
+
 @endsection

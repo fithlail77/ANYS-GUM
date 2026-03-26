@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -33,7 +34,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->get('username');
+        $user->email = $request->get('email');
+        $user->password = bcrypt('password');
+        $user->assignRole($request->get('roles') == 'admin' ? 'admin' : 'user');
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'User Berhasil Dibuat');
     }
 
     /**
@@ -41,7 +49,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::pluck('name')->all();
+        $userRole = $user->roles->pluck('name')->all();
+
+        return view('auth.show', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -61,20 +73,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'roles' => 'required'
-        ]);
 
-        $user = User::find($id);
-        $input = $request->all();
-        $user->update($input);
-        
-        $user->syncRoles($request->input('roles'));
-
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
     }
 
     /**
@@ -82,6 +81,21 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->delete();
+            $user->removeRole('admin', 'user', 'manager');
+        }
+
+        return redirect()->route('users.index')->with('success', 'User Berhasil Dihapus!!');
+    }
+
+    public function changePassword(Request $request, string $id)
+    {
+        $userChange = User::findOrFail($id);
+        $userChange->password = $request->get('pass');
+        $userChange->save();
+
+        return redirect()->route('users.index')->with('success', 'Kata Sandi berhasil diubah');
     }
 }
