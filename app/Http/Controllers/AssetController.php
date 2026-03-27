@@ -206,4 +206,32 @@ class AssetController extends Controller
     {
         return Excel::download(new AssetsExport, 'data_asset_' . date('Ymd_His') . '.xlsx');
     }
+
+    /**
+     * Mencari ID aset berdasarkan asset_number atau asset_sap_code
+     */
+    public function findByCode($code)
+    {
+        $query = Asset::query();
+
+        $query->where(function($q) use ($code) {
+            $q->where('asset_number', $code);
+            // Hanya cari di asset_sap_code jika input numerik untuk mencegah error di PostgreSQL
+            if (is_numeric($code)) {
+                $q->orWhere('asset_sap_code', $code);
+            }
+        });
+
+        if (auth()->user()->department) {
+            $query->where('asset_owner', auth()->user()->department);
+        }
+
+        $asset = $query->first();
+
+        if ($asset) {
+            return response()->json(['success' => true, 'id' => $asset->id]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Asset tidak ditemukan.']);
+    }
 }

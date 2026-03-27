@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('assets/print', [AssetController::class, 'printIndex'])->name('assets.print-index');
     Route::post('assets/print/process', [AssetController::class, 'printProcess'])->name('assets.print-process');
     Route::post('assets/{asset}/transfer', [AssetController::class, 'transfer'])->name('assets.transfer');
+    Route::get('assets/find-by-code/{code}', [AssetController::class, 'findByCode'])->name('assets.find-by-code')->where('code', '.*');
     Route::resource('assets', AssetController::class);
 });
 
