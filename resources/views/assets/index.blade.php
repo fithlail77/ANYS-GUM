@@ -12,12 +12,9 @@
             </button>
         </div>
         <div>
-            <button class="btn btn-success btn-sm btn-flat" id="exportExcel">
+            <a href="{{ route('assets.export') }}" class="btn btn-success btn-sm btn-flat">
                 <i class="fa fa-file-excel"></i> Export Excel
-            </button>
-            <button class="btn btn-danger btn-sm btn-flat" id="exportPdf">
-                <i class="fa fa-file-pdf"></i> Export PDF
-            </button>
+            </a>
         </div>
     </div>
 </div>

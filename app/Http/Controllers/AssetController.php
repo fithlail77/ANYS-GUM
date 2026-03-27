@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AssetsExport;
 use App\Models\Asset;
 use App\Services\AssetService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AssetController extends Controller
@@ -195,5 +197,13 @@ class AssetController extends Controller
 
         $assets = \App\Models\Asset::whereIn('id', $ids)->get();
         return view('assets.print_labels', compact('assets', 'type'));
+    }
+
+    /**
+     * Fungsi untuk ekspor data ke Excel
+     */
+    public function export()
+    {
+        return Excel::download(new AssetsExport, 'data_asset_' . date('Ymd_His') . '.xlsx');
     }
 }
