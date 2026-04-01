@@ -45,7 +45,7 @@
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Admin Management</div>
             @php
-                $isSettingsActive = request()->routeIs('users.index');
+                $isSettingsActive = request()->routeIs('users.index') || request()->routeIs('activity.index');
             @endphp
             <li class="nav-item {{ $isSettingsActive ? 'active' : '' }}">
                 <a class="nav-link {{ $isSettingsActive ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -57,6 +57,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Settings:</h6>
                         <a class="collapse-item {{ request()->routeIs('users.index') ? 'active' : '' }}" href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                        <a class="collapse-item {{ request()->routeIs('activity.index') ? 'active' : '' }}" href="{{ route('activity.index') }}">{{ __('Activity Log') }}</a>
                     </div>
                 </div>
             </li>

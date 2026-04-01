@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('assets/{asset}/transfer', [AssetController::class, 'transfer'])->name('assets.transfer');
     Route::get('assets/find-by-code/{code}', [AssetController::class, 'findByCode'])->name('assets.find-by-code')->where('code', '.*');
     Route::resource('assets', AssetController::class);
+
+    Route::resource('activity', ActivityLogController::class);
 });
 
 require __DIR__.'/auth.php';

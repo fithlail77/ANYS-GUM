@@ -27,9 +27,21 @@
                 <div class="col-md-6">
                     <label class="small mb-1">Kategori</label>
                     <select class="form-control" name="category" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="Furniture" {{ $asset->category == 'Furniture' ? 'selected' : '' }}>Furniture</option>
+                        <option value="Kenderaan" {{ $asset->category == 'Kenderaan' ? 'selected' : '' }}>Kenderaan</option>
+                        <option value="Elektronik" {{ $asset->category == 'Elektronik' ? 'selected' : '' }}>Elektronik</option>
                         <option value="Laptop" {{ $asset->category == 'Laptop' ? 'selected' : '' }}>Laptop</option>
                         <option value="PC Desktop" {{ $asset->category == 'PC Desktop' ? 'selected' : '' }}>PC Desktop</option>
-                        <option value="Elektronik" {{ $asset->category == 'Elektronik' ? 'selected' : '' }}>Elektronik</option>
+                        <option value="Monitor" {{ $asset->category == 'Monitor' ? 'selected' : '' }}>Monitor</option>
+                        <option value="Printer" {{ $asset->category == 'Printer' ? 'selected' : '' }}>Printer</option>
+                        <option value="Switch" {{ $asset->category == 'Switch' ? 'selected' : '' }}>Switch</option>
+                        <option value="Router" {{ $asset->category == 'Router' ? 'selected' : '' }}>Router</option>
+                        <option value="AP Indoor" {{ $asset->category == 'AP Indoor' ? 'selected' : '' }}>AP Indoor</option>
+                        <option value="AP Outdoor" {{ $asset->category == 'AP Outdoor' ? 'selected' : '' }}>AP Outdoor</option>
+                        <option value="HT" {{ $asset->category == 'HT' ? 'selected' : '' }}>HT</option>
+                        <option value="Rig" {{ $asset->category == 'Rig' ? 'selected' : '' }}>Rig</option>
+                        <option value="Proyektor" {{ $asset->category == 'Proyektor' ? 'selected' : '' }}>Proyektor</option>
                         {{-- Tambahkan opsi lain sesuai kebutuhan --}}
                     </select>
                 </div>
