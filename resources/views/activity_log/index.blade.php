@@ -71,6 +71,4 @@
         </div>
     </div>
 </div>
-
-{{ $logs->links() }}
 @endsection
