@@ -69,7 +69,7 @@
         @if($asset->serial_number)
         <div class="label-sub">SN: {{ $asset->serial_number }}</div>
         @endif
-        <div class="label-sub" style="font-style: italic;">Pengguna: {{ $asset->current_owner }}</div>
+        <div class="label-sub">Pengguna: {{ $asset->current_owner }}</div>
         <div class="code-display">
             @if($type == 'barcode')
                 <svg class="barcode" id="barcode-{{ $asset->id }}"></svg>
