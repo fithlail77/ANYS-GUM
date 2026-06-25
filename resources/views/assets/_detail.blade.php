@@ -13,6 +13,10 @@
                         <td>{{ $asset->asset_sap_code }}</td>
                     </tr>
                     <tr>
+                        <th>Serial Number</th>
+                        <td>{{ $asset->serial_number ?? '-' }}</td>
+                    </tr>
+                    <tr>
                         <th>Nama Aset</th>
                         <td>{{ $asset->asset_name }}</td>
                     </tr>

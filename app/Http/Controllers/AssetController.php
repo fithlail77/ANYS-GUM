@@ -35,6 +35,7 @@ class AssetController extends Controller
             'id',
             'asset_number',
             'asset_sap_code',
+            'serial_number',
             'asset_name',
             'description',
             'category',
@@ -83,6 +84,7 @@ class AssetController extends Controller
     {
         $validateData = $request->validate([
             'asset_sap_code' => 'required|integer',
+            'serial_number' => 'nullable|string|max:255',
             'asset_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category' => 'required|string|max:255',
@@ -130,6 +132,7 @@ class AssetController extends Controller
         $asset = Asset::findOrFail($id);
         $validateData = $request->validate([
             'asset_sap_code' => 'required|integer',
+            'serial_number' => 'nullable|string|max:255',
             'asset_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category' => 'required|string|max:255',
@@ -216,10 +219,11 @@ class AssetController extends Controller
 
         $query->where(function($q) use ($code) {
             $q->where('asset_number', $code);
-            // Hanya cari di asset_sap_code jika input numerik untuk mencegah error di PostgreSQL
+            // Hanya cari di asset_sap_code dan serial_number jika input numerik untuk mencegah error di PostgreSQL
             if (is_numeric($code)) {
                 $q->orWhere('asset_sap_code', $code);
             }
+            $q->orWhere('serial_number', 'like', '%' . $code . '%');
         });
 
         if (auth()->user()->department) {

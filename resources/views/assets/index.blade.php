@@ -59,6 +59,10 @@
                         <input class="form-control" name="asset_sap_code" type="number"/>
                     </div>
                     <div class="col-md-3">
+                        <label class="small mb-1">Serial Number</label>
+                        <input class="form-control" name="serial_number" type="text"/>
+                    </div>
+                    <div class="col-md-3">
                         <label class="small mb-1">Nama Asset</label>
                         <input class="form-control" name="asset_name" type="text"/>
                     </div>
@@ -82,6 +86,8 @@
                             <option value="Proyektor">Proyektor</option>
                         </select>
                     </div>
+                </div>
+                <div class="row gx-3 mb-3">
                     <div class="col-md-3">
                         <label class="small mb-1">Pemilik Asset</label>
                         <select class="form-control" name="asset_owner" required>
@@ -91,8 +97,6 @@
                             <option value="EHSS">EHSS</option>
                         </select>
                     </div>
-                </div>
-                <div class="row gx-3 mb-3">
                     <div class="col-md-3">
                         <label class="small mb-1">Pengguna Asset</label>
                         <input class="form-control" name="current_owner" type="text"/>
@@ -105,12 +109,12 @@
                         <label class="small mb-1">Tanggal Perolehan Asset</label>
                         <input class="form-control" name="acquisition_date" type="date" />
                     </div>
+                </div>
+                <div class="row gx-3 mb-3">
                     <div class="col-md-3">
                         <label class="small mb-1">Biaya Perolehan Asset</label>
                         <input class="form-control" name="acquisition_cost" type="number"/>
                     </div>
-                </div>
-                <div class="row gx-3 mb-3">
                     <div class="col-md-3">
                         <label class="small mb-1">Depresiasi Asset</label>
                         <input class="form-control" name="depreciation" type="number"/>
@@ -127,6 +131,8 @@
                         <label class="small mb-1">Foto Barang (Opsional)</label>
                         <input type="file" name="photo" accept="image/*"/>
                     </div>
+                </div>
+                <div class="row gx-3 mb-3">
                     <div class="col-md-3">
                         <label class="small mb-1">Deskripsi/Spesifikasi Aset</label>
                         <textarea class="form-control" name="description" rows="3"></textarea>

@@ -33,7 +33,10 @@
                                 <input type="checkbox" id="selectAll">
                             </th>
                             <th>Nomor Asset</th>
+                            <th>SAP Code</th>
+                            <th>Serial Number</th>
                             <th>Nama Asset</th>
+                            <th>Pengguna</th>
                             <th>Kategori</th>
                             <th>Lokasi</th>
                         </tr>
@@ -45,7 +48,10 @@
                                 <input type="checkbox" name="asset_ids[]" value="{{ $asset->id }}" class="asset-checkbox">
                             </td>
                             <td>{{ $asset->asset_number }}</td>
+                            <td>{{ $asset->asset_sap_code }}</td>
+                            <td>{{ $asset->serial_number ?? '-' }}</td>
                             <td>{{ $asset->asset_name }}</td>
+                            <td>{{ $asset->current_owner }}</td>
                             <td>{{ $asset->category }}</td>
                             <td>{{ $asset->location }}</td>
                         </tr>

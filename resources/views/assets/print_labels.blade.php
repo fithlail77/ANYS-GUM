@@ -21,41 +21,34 @@
             width: 50mm;
             height: 30mm;
             page-break-after: always;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1mm 2mm;
+            padding: 1.5mm 2mm;
             box-sizing: border-box;
             overflow: hidden;
+            position: relative;
         }
-        .asset-number {
-            font-size: 10px;
+        .label-header {
+            font-size: 8px;
             font-weight: bold;
-            margin-bottom: 1mm;
             text-align: center;
-            width: 100%;
+            margin-bottom: 0.5mm;
+            line-height: 1.2;
+        }
+        .label-sub {
+            font-size: 7px;
+            text-align: center;
+            margin-bottom: 0.3mm;
+            line-height: 1.1;
         }
         .code-display {
-            margin: 1mm 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            margin: 0.5mm 0;
         }
         svg.barcode {
-            display: block;
-            max-width: 42mm; /* Dibatasi agar tidak menyentuh tepi kertas 50mm */
-            height: 15mm;   /* Tinggi proporsional untuk kertas 30mm */
-        }
-        .asset-name {
-            font-size: 8px;
-            margin-top: 1mm;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             width: 100%;
+            max-width: 46mm;
+            height: 12mm;
         }
         @media print {
             .no-print { display: none; }
@@ -70,7 +63,13 @@
 
     @foreach($assets as $asset)
     <div class="label-container">
-        <div class="asset-number">{{ $asset->asset_number }}</div>
+        <div class="label-header">{{ $asset->asset_number }}</div>
+        <div class="label-sub">SAP: {{ $asset->asset_sap_code }}</div>
+        <div class="label-sub">{{ \Illuminate\Support\Str::limit($asset->asset_name, 30) }}</div>
+        @if($asset->serial_number)
+        <div class="label-sub">SN: {{ $asset->serial_number }}</div>
+        @endif
+        <div class="label-sub" style="font-style: italic;">Pengguna: {{ $asset->current_owner }}</div>
         <div class="code-display">
             @if($type == 'barcode')
                 <svg class="barcode" id="barcode-{{ $asset->id }}"></svg>
@@ -78,7 +77,6 @@
                 <div id="qrcode-{{ $asset->id }}"></div>
             @endif
         </div>
-        <div class="asset-name">{{ $asset->asset_name }}</div>
     </div>
     @endforeach
 
@@ -88,17 +86,17 @@
                 @if($type == 'barcode')
                     JsBarcode("#barcode-{{ $asset->id }}", "{{ $asset->asset_number }}", {
                         format: "CODE128",
-                        width: 1.5,     /* Diperkecil dari 2 ke 1.5 agar tidak terlalu lebar */
-                        height: 50,      /* Tinggi barcode diatur agar pas */
+                        width: 1.2,
+                        height: 40,
                         displayValue: false,
-                        margin: 5        /* Memberikan sedikit ruang aman */
+                        margin: 0
                     });
                 @else
                     new QRCode(document.getElementById("qrcode-{{ $asset->id }}"), {
                         text: "{{ $asset->asset_number }}",
-                        width: 70,
-                        height: 70,
-                        correctLevel : QRCode.CorrectLevel.M
+                        width: 50,
+                        height: 50,
+                        correctLevel: QRCode.CorrectLevel.M
                     });
                 @endif
             @endforeach

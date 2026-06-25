@@ -43,7 +43,7 @@ class AssetsExport implements FromCollection, WithHeadings, WithMapping, WithDra
     public function headings(): array
     {
         return [
-            'No', 'Nomor Asset', 'Nomor Asset SAP', 'Nama Asset', 'Deskripsi Aset', 'Kategori', 
+            'No', 'Nomor Asset', 'Nomor Asset SAP', 'Serial Number', 'Nama Asset', 'Deskripsi Aset', 'Kategori', 
             'Pemilik Aset', 'Pengguna Aset', 'Lokasi', 'Tanggal Perolehan Aset', 
             'Nilai Perolehan Aset', 'Depresiasi', 'Kondisi', 'Foto Aset'
         ];
@@ -58,6 +58,7 @@ class AssetsExport implements FromCollection, WithHeadings, WithMapping, WithDra
             ++$this->rowNumber,
             $asset->asset_number,
             $asset->asset_sap_code,
+            $asset->serial_number,
             $asset->asset_name,
             $asset->description,
             $asset->category,
@@ -86,9 +87,9 @@ class AssetsExport implements FromCollection, WithHeadings, WithMapping, WithDra
                 $drawing->setPath(storage_path('app/public/' . $asset->photo_path));
                 $drawing->setHeight(50); // Tinggi gambar dalam pixel
                 
-                // Koordinat kolom 'Foto Aset' adalah N (kolom ke-14)
-                // Baris dimulai dari 2 (karena baris 1 adalah header)
-                $column = 'N';
+// Koordinat kolom 'Foto Aset' adalah O (kolom ke-15)
+                 // Baris dimulai dari 2 (karena baris 1 adalah header)
+                 $column = 'O';
                 $row = $index + 2; 
                 $drawing->setCoordinates($column . $row);
                 
@@ -110,6 +111,6 @@ class AssetsExport implements FromCollection, WithHeadings, WithMapping, WithDra
         }
         
         // Atur lebar kolom foto agar pas
-        $sheet->getColumnDimension('N')->setWidth(15);
+        $sheet->getColumnDimension('O')->setWidth(15);
     }
 }

@@ -13,14 +13,14 @@
         <form action="{{ route('assets.update', $asset->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="row gx-3 mb-3">
-                <div class="col-md-6">
-                    <label class="small mb-1">Nama Asset</label>
-                    <input class="form-control" name="asset_name" type="text" value="{{ $asset->asset_name }}" required/>
-                </div>
+<div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label class="small mb-1">Nomor SAP Asset</label>
                     <input class="form-control" name="asset_sap_code" type="number" value="{{ $asset->asset_sap_code }}" required/>
+                </div>
+                <div class="col-md-6">
+                    <label class="small mb-1">Serial Number</label>
+                    <input class="form-control" name="serial_number" type="text" value="{{ $asset->serial_number }}"/>
                 </div>
             </div>
             <div class="row gx-3 mb-3">
