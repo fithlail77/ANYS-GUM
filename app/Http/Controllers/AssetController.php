@@ -54,7 +54,7 @@ class AssetController extends Controller
             $query->where('asset_owner', auth()->user()->department);
         }
 
-        $query->orderBy('asset_number', 'asc');
+        $query->orderBy('id', 'asc');
 
         return DataTables::of($query)
             ->addIndexColumn()
