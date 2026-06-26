@@ -99,7 +99,7 @@
                     <div class="form-group">
                         <label class="col-lg-20 control-label">Departemen</label>
                         <div class="col-lg-10">
-                            <select id="department" name="department" class="form-control" required>
+                            <select id="department" name="department" class="form-control">
                                 <option value="">--Pilih Departemen--</option>
                                 <option value="IT">IT</option>
                                 <option value="Umum">Umum</option>
