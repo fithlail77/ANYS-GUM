@@ -25,6 +25,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nomor Asset</th>
+                    <th>No SAP</th>
                     <th>Nama Asset</th>
                     <th>Kategori</th>
                     <th>Lokasi</th>
@@ -210,6 +211,7 @@
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'asset_number', name: 'asset_number' },
+            { data: 'asset_sap_code', name: 'asset_sap_code' },
             { data: 'asset_name', name: 'asset_name' },
             { data: 'category', name: 'category' },
             { data: 'location', name: 'location' },
