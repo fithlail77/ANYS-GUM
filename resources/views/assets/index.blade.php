@@ -126,6 +126,7 @@
                             <option value="">-- Pilih --</option>
                             <option value="Baik">Baik</option>
                             <option value="Rusak">Rusak</option>
+                            <option value="Disposal">Disposal</option>
                         </select>
                     </div>
                     <div class="col-md-3">
