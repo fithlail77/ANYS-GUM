@@ -58,7 +58,7 @@ class AssetService
 
         // Perbaikan: Ambil ID terakhir secara global agar nomor urut mengikuti ID (Running Number Global)
         // Jika tabel kosong, mulai dari 0. Jika ada ID 2, maka selanjutnya 3.
-        $lastId = Asset::max('id') ?? 0;
+        $lastId = Asset::withoutGlobalScope('department')->max('id') ?? 0;
         $newNumber = str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
 
         return $prefix . $newNumber;
