@@ -85,6 +85,10 @@
                             <option value="HT">HT</option>
                             <option value="Rig">Rig</option>
                             <option value="Proyektor">Proyektor</option>
+                            <option value="Peralatan DAMKAR">Peralatan DAMKAR</option>
+                            <option value="Peralatan Lingkungan">Peralatan Lingkungan</option>
+                            <option value="Peralatan Safety">Peralatan Safety</option>
+                            <option value="Peralatan HCV">Peralatan HCV</option>
                         </select>
                     </div>
                 </div>
