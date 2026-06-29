@@ -29,6 +29,7 @@
                     <th>Nama Asset</th>
                     <th>Kategori</th>
                     <th>Lokasi</th>
+                    <th>Pengguna</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -220,6 +221,7 @@
             { data: 'asset_name', name: 'asset_name' },
             { data: 'category', name: 'category' },
             { data: 'location', name: 'location' },
+            { data: 'current_owner', name: 'current_owner' },
             { data: 'condition', name: 'condition' },
             { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
         ]
